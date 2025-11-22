@@ -9,9 +9,8 @@ package ca_2;
  * @author james
  */
 public enum MenuOption {
-    ADD_EMPLOYEE,
     DISPLAY_ALL,
     SORT_EMPLOYEES,
     SEARCH_EMPLOYEE,
-    EXIT;
+    EXIT
 }
