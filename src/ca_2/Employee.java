@@ -9,35 +9,46 @@ package ca_2;
  * @author james
  */
 public class Employee implements Comparable<Employee> {
-    private int id;
+    // The 9 fields from your text file
     private String firstName;
     private String lastName;
-    private String department;
+    private String gender;
     private String email;
+    private double salary;
+    private String department;
+    private String position;
+    private String jobTitle;
+    private String company;
 
     // Constructor
-    public Employee(int id, String firstName, String lastName, String department, String email) {
-        this.id = id;
+    public Employee(String firstName, String lastName, String gender, String email, 
+                    double salary, String department, String position, String jobTitle, String company) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.department = department;
+        this.gender = gender;
         this.email = email;
+        this.salary = salary;
+        this.department = department;
+        this.position = position;
+        this.jobTitle = jobTitle;
+        this.company = company;
     }
 
-    // Getters (you need these for sorting/searching)
-    public String getLastName() { return lastName; }
-    public int getId() { return id; }
-
-    // To String (for printing)
-    @Override
-    public String toString() {
-        return "ID: " + id + " | Name: " + lastName + ", " + firstName + " | Dept: " + department;
+    // Required for searching by Name
+    public String getLastName() {
+        return lastName;
     }
 
-    // Comparable Interface (Crucial for Sorting!)
+    // Required for sorting (Alphabetical by Last Name)
     @Override
     public int compareTo(Employee other) {
-        // Sorts alphabetically by Last Name
         return this.lastName.compareToIgnoreCase(other.lastName);
+    }
+
+    // Pretty printing for the console
+    @Override
+    public String toString() {
+        return String.format("%-12s %-12s | %-25s | %-15s", 
+            lastName, firstName, jobTitle, company);
     }
 }
