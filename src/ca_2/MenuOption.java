@@ -14,3 +14,5 @@ public enum MenuOption {
     SEARCH_EMPLOYEE,
     EXIT
 }
+
+// Need to add a function of adding new employee
