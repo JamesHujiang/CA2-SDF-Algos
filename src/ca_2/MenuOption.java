@@ -12,7 +12,8 @@ public enum MenuOption {
     DISPLAY_ALL,
     SORT_EMPLOYEES,
     SEARCH_EMPLOYEE,
+    ADD_EMPLOYEE,
+    SHOW_HIERARCHY, // <--- New Option
     EXIT
 }
 
-// Need to add a function of adding new employee

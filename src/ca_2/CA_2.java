@@ -16,10 +16,9 @@ public class CA_2 {
         Scanner scanner = new Scanner(System.in);
         CompanyManager company = new CompanyManager();
         
-        // IMPORTANT: Ensure this file is in your project folder (not src)
+        // Make sure this path is correct!
         String filename = "Applicants_Form - Sample data file for read.txt";
         
-        // Auto-load data on startup
         System.out.println("Initializing System...");
         company.loadEmployeesFromFile(filename);
 
@@ -32,12 +31,13 @@ public class CA_2 {
             System.out.println("1. Display All Staff");
             System.out.println("2. Sort Staff (Merge Sort)");
             System.out.println("3. Search Staff (Binary Search)");
-            System.out.println("4. Exit");
+            System.out.println("4. Add New Employee");
+            System.out.println("5. Show Hierarchy (Tree/Dept View)"); // <--- New Line
+            System.out.println("6. Exit");
             System.out.print(">> Enter Choice: ");
 
-            // Validate Input
             if (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Enter a number.");
+                System.out.println("Invalid input.");
                 scanner.next(); 
                 continue;
             }
@@ -58,11 +58,18 @@ public class CA_2 {
                     company.searchByLastName(query);
                     break;
                 case 4:
+                    company.addEmployeeManually(scanner);
+                    break;
+                case 5:
+                    // This calls the new Hierarchy method in CompanyManager
+                    company.displayHierarchy(); 
+                    break;
+                case 6:
                     running = false;
                     System.out.println("Exiting...");
                     break;
                 default:
-                    System.out.println("Invalid option. Try 1-4.");
+                    System.out.println("Invalid option.");
             }
         }
     }

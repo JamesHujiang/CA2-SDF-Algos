@@ -9,18 +9,16 @@ package ca_2;
  * @author james
  */
 public class Employee implements Comparable<Employee> {
-    // The 9 fields from your text file
-    private String firstName;
-    private String lastName;
-    private String gender;
-    private String email;
-    private double salary;
-    private String department;
-    private String position;
-    private String jobTitle;
-    private String company;
+    protected String firstName;
+    protected String lastName;
+    protected String gender;
+    protected String email;
+    protected double salary;
+    protected String department;
+    protected String position;
+    protected String jobTitle;
+    protected String company;
 
-    // Constructor
     public Employee(String firstName, String lastName, String gender, String email, 
                     double salary, String department, String position, String jobTitle, String company) {
         this.firstName = firstName;
@@ -34,21 +32,18 @@ public class Employee implements Comparable<Employee> {
         this.company = company;
     }
 
-    // Required for searching by Name
-    public String getLastName() {
-        return lastName;
-    }
+    public String getLastName() { return lastName; }
+    public String getDepartmentName() { return department; }
 
-    // Required for sorting (Alphabetical by Last Name)
     @Override
     public int compareTo(Employee other) {
         return this.lastName.compareToIgnoreCase(other.lastName);
     }
 
-    // Pretty printing for the console
     @Override
     public String toString() {
-        return String.format("%-12s %-12s | %-25s | %-15s", 
-            lastName, firstName, jobTitle, company);
+        // Displays key info: Name, Job, Dept, Company
+        return String.format("%-12s %-12s | %-20s | %-15s | %s", 
+            lastName, firstName, jobTitle, department, company);
     }
 }
