@@ -4,34 +4,38 @@
  */
 package ca_2;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author james
  */
-public class Department {
-    private String deptName;
-    private String location;
-    private List<Employee> staff;
+public abstract class Department {
 
-    public Department(String deptName, String location) {
+    public enum Name { FASHION, TECHNOLOGY, LIVING }
+    protected Name deptName;
+
+    public Department(Name deptName) {
         this.deptName = deptName;
-        this.location = location;
-        this.staff = new ArrayList<>();
     }
-
-    public void addStaff(Employee e) {
-        staff.add(e);
-    }
-
-    public String getDeptName() { return deptName; }
     
-    public void displayStaff() {
-        System.out.println("\n--- Department: " + deptName + " (" + location + ") ---");
-        for (Employee e : staff) {
-            System.out.println(e);
-        }
+    public abstract String getTeamGoal();
+
+    @Override
+    public String toString() { return deptName.toString(); }
+
+    // --- INNER CLASSES (The Subtypes) ---
+    
+    public static class Technology extends Department {
+        public Technology() { super(Name.TECHNOLOGY); }
+        @Override public String getTeamGoal() { return "Sell Gadgets"; }
+    }
+
+    public static class Fashion extends Department {
+        public Fashion() { super(Name.FASHION); }
+        @Override public String getTeamGoal() { return "Latest Trends"; }
+    }
+
+    public static class Living extends Department {
+        public Living() { super(Name.LIVING); }
+        @Override public String getTeamGoal() { return "Home Comfort"; }
     }
 }
