@@ -59,12 +59,18 @@ public class CA_2 {
                         isSorted = true;
 
                         System.out.println("\n--- TOP 20 STAFF (A-Z) ---");
-                        // Loop up to 20, or the list size (whichever is smaller to avoid errors)
-                        int limit = Math.min(20, staffList.size());
 
+                        // 1. The Header (Matches the width of the toString above)
+                        // We add "%-4s" at the start for the numbered list (e.g., "1. ")
+                        System.out.printf("%-4s %-12s %-12s [ %-12s | %-12s ] %s%n", 
+                                "#", "LAST NAME", "FIRST NAME", "DEPARTMENT", "ROLE", "CONTRACT");
+                        System.out.println("-------------------------------------------------------------------------------------");
+
+                        // 2. The Loop
+                        int limit = Math.min(20, staffList.size());
                         for(int i=0; i < limit; i++) {
-                            // Print index + 1 so it looks like a numbered list (1-20)
-                            System.out.println((i + 1) + ". " + staffList.get(i));
+                            // %-4d puts the number in a 4-char block (e.g., "1.  ")
+                            System.out.printf("%-4s %s%n", (i + 1) + ".", staffList.get(i));
                         }
                         break;
                        

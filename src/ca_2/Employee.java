@@ -33,7 +33,7 @@ public abstract class Employee implements Comparable<Employee> {
 
     @Override
     public String toString() {
-        return String.format("%-10s %-10s [%-10s | %-10s] - %s", 
+        return String.format("%-12s %-12s [ %-12s | %-12s ] - %s", 
                 lastName, firstName, 
                 department.toString(), role.toString(), 
                 getContractType());
