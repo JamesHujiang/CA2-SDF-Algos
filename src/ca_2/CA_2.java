@@ -93,14 +93,87 @@ public class CA_2 {
                         break;
                         
                     case ADD_NEW_RECORD:
-                        // TODO: Add logic
-                        System.out.println("Feature coming soon...");
-                        isSorted = false; // List is broken now
+                        System.out.println("\n--- ADD NEW EMPLOYEE ---");
+
+                        // 1. Get Names
+                        System.out.print("Enter First Name: ");
+                        String newFirst = input.nextLine();
+                        System.out.print("Enter Last Name: ");
+                        String newLast = input.nextLine();
+
+                        // 2. Get Department (with Validation)
+                        Department newDept = null;
+                        while (newDept == null) {
+                            System.out.println("Departments: [1] TECHNOLOGY, [2] FASHION, [3] LIVING");
+                            System.out.print("Select Department (1-3): ");
+                            String dChoice = input.nextLine();
+
+                            if (dChoice.equals("1")) newDept = new Department.Technology();
+                            else if (dChoice.equals("2")) newDept = new Department.Fashion();
+                            else if (dChoice.equals("3")) newDept = new Department.Living();
+                            else System.out.println("Invalid choice. Try again.");
+                        }
+
+                        // 3. Get Role (with Validation)
+                        Role newRole = null;
+                        while (newRole == null) {
+                            System.out.println("Roles: [1] EXECUTIVE, [2] SUPERVISOR, [3] ASSOCIATE");
+                            System.out.print("Select Role (1-3): ");
+                            String rChoice = input.nextLine();
+
+                            if (rChoice.equals("1")) newRole = new Role.Executive();
+                            else if (rChoice.equals("2")) newRole = new Role.Supervisor();
+                            else if (rChoice.equals("3")) newRole = new Role.Associate();
+                            else System.out.println("Invalid choice. Try again.");
+                        }
+
+                        // 4. Get Contract Type
+                        Employee newEmp = null;
+                        while (newEmp == null) {
+                            System.out.println("Contract: [1] Full-Time, [2] Part-Time, [3] Seasonal");
+                            System.out.print("Select Contract (1-3): ");
+                            String cChoice = input.nextLine();
+
+                            if (cChoice.equals("1")) newEmp = new Employee.FullTime(newFirst, newLast, newDept, newRole);
+                            else if (cChoice.equals("2")) newEmp = new Employee.PartTime(newFirst, newLast, newDept, newRole);
+                            else if (cChoice.equals("3")) newEmp = new Employee.Seasonal(newFirst, newLast, newDept, newRole);
+                            else System.out.println("Invalid choice. Try again.");
+                        }
+
+                        // 5. Add to List
+                        staffList.add(newEmp);
+                        System.out.println("SUCCESS: Added " + newFirst + " " + newLast + " to the system.");
+
+                        // CRITICAL: Mark list as Unsorted because we appended to the end
+                        isSorted = false; 
                         break;
                         
                     case DISPLAY_HIERARCHY:
-                        // TODO: Call BinaryTree builder
-                        System.out.println("Building Tree...");
+                        System.out.println("Generating Organisation Chart...");
+
+                        // STEP 1: Sort by Rank (Executives First)
+                        // We use a lambda comparator here to sort by Rank Number (1 -> 3)
+                        staffList.sort((e1, e2) -> Integer.compare(e1.getRole().getRank(), e2.getRole().getRank()));
+
+                        // STEP 2: Create Tree and Fill it
+                        BinaryTree orgTree = new BinaryTree();
+
+                        // Insert top 20 people
+                        int treeLimit = Math.min(20, staffList.size());
+                        for (int i = 0; i < treeLimit; i++) {
+                            orgTree.insert(staffList.get(i));
+                        }
+
+                        // STEP 3: Display
+                        orgTree.printHierarchy();
+
+                        // STEP 4: Stats
+                        System.out.println("\n--- TREE STATS ---");
+                        System.out.println("Total Nodes: " + orgTree.countNodes());
+                        System.out.println("Tree Height: " + orgTree.getHeight());
+
+                        // Reset 'isSorted' because we just messed up the Alphabetical order!
+                        isSorted = false; 
                         break;
                         
                     case EXIT:
