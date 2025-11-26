@@ -83,10 +83,14 @@ public class CA_2 {
                         System.out.print("Enter Last Name to search: ");
                         String query = input.nextLine();
 
-                        Employee result = AlgorithmUtils.binarySearch(staffList, query);
+                        // CALL THE NEW METHOD
+                        ArrayList<Employee> results = AlgorithmUtils.binarySearch(staffList, query);
 
-                        if (result != null) {
-                            System.out.println("FOUND: " + result);
+                        if (!results.isEmpty()) {
+                            System.out.println("\n--- FOUND " + results.size() + " RESULT(S) ---");
+                            for (Employee e : results) {
+                                System.out.println(e); // Uses the nice toString we made
+                            }
                         } else {
                             System.out.println("User '" + query + "' not found.");
                         }

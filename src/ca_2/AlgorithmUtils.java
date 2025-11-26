@@ -55,24 +55,60 @@ public class AlgorithmUtils {
     }
 
     // --- BINARY SEARCH ---
-    // Returns the Employee object if found, or null if not found
-    public static Employee binarySearch(ArrayList<Employee> list, String targetLastName) {
+    // Returns a LIST of matches (to handle duplicates like multiple "Smiths")
+    public static ArrayList<Employee> binarySearch(ArrayList<Employee> list, String targetLastName) {
+        ArrayList<Employee> results = new ArrayList<>();
+        
         int low = 0;
         int high = list.size() - 1;
+        int index = -1;
 
+        // 1. Standard Binary Search to find ONE match
         while (low <= high) {
             int mid = (low + high) / 2;
             Employee midEmp = list.get(mid);
             int comparison = midEmp.getLastName().compareToIgnoreCase(targetLastName);
 
             if (comparison == 0) {
-                return midEmp; // Found!
+                index = mid; // Found one!
+                break; 
             } else if (comparison < 0) {
-                low = mid + 1; // Look in right half
+                low = mid + 1;
             } else {
-                high = mid - 1; // Look in left half
+                high = mid - 1;
             }
         }
-        return null; // Not found
+
+        // If no match found, return empty list
+        if (index == -1) return results;
+
+        // 2. Expand Left (Check previous records)
+        int temp = index;
+        while (temp >= 0 && list.get(temp).getLastName().equalsIgnoreCase(targetLastName)) {
+            results.add(list.get(temp));
+            temp--;
+        }
+        
+        // Note: The loop above adds them in reverse order (Middle, Left 1, Left 2...)
+        // But since we want ALL matches, we need to check the RIGHT side too.
+        // A cleaner way is to find the FIRST occurrence and then iterate forward.
+        
+        // --- BETTER STRATEGY: Find First Occurrence Logic ---
+        // Let's stick to the simpler expansion for now, but clear the list first to avoid duplicates
+        results.clear();
+        
+        // Find the absolute first occurrence
+        int start = index;
+        while (start > 0 && list.get(start - 1).getLastName().equalsIgnoreCase(targetLastName)) {
+            start--;
+        }
+        
+        // Now add everyone from 'start' until the name changes
+        while (start < list.size() && list.get(start).getLastName().equalsIgnoreCase(targetLastName)) {
+            results.add(list.get(start));
+            start++;
+        }
+
+        return results;
     }
 }
