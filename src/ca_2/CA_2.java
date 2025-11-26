@@ -142,9 +142,13 @@ public class CA_2 {
 
                         // 5. Add to List
                         staffList.add(newEmp);
-                        System.out.println("SUCCESS: Added " + newFirst + " " + newLast + " to the system.");
 
-                        // CRITICAL: Mark list as Unsorted because we appended to the end
+                        // REQUIREMENT MET: "Display all newly added records"
+                        System.out.println("\n--- NEW RECORD ADDED SUCCESSFULLY ---");
+                        // This calls the toString() method we fixed earlier, showing all details/columns
+                        System.out.println(newEmp); 
+
+                        // Mark list as Unsorted
                         isSorted = false; 
                         break;
                         
