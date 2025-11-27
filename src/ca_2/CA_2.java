@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class CA_2 {
 
-    // The "Database" in memory
+    // The "Database" in  memory
     private static ArrayList<Employee> staffList = new ArrayList<>();
     
     // The Flag (Robustness Requirement)
