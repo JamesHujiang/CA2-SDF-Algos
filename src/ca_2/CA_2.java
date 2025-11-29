@@ -15,13 +15,13 @@ import java.util.Scanner;
  */
 public class CA_2 {
 
-    // The "Database" in  memory
+    // The data in memory
     private static ArrayList<Employee> staffList = new ArrayList<>();
     
-    // The Flag (Robustness Requirement)
+    // The Flag of sorted of the list
     private static boolean isSorted = false;
 
-    // The Menu Enum (Nested here to save file count)
+    // The Menu Enum
     public enum MenuOption {
         SORT_EMPLOYEES,
         SEARCH_EMPLOYEE,
@@ -61,7 +61,7 @@ public class CA_2 {
                         System.out.println("\n--- TOP 20 STAFF (A-Z) ---");
 
                         // 1. The Header (Matches the width of the toString above)
-                        // We add "%-4s" at the start for the numbered list (e.g., "1. ")
+                        // "%-4s" at the start for the numbered list (e.g., "1. ")
                         System.out.printf("%-4s %-12s %-12s [ %-12s | %-12s ] %s%n", 
                                 "#", "LAST NAME", "FIRST NAME", "DEPARTMENT", "ROLE", "CONTRACT");
                         System.out.println("-------------------------------------------------------------------------------------");
@@ -89,7 +89,7 @@ public class CA_2 {
                         if (!results.isEmpty()) {
                             System.out.println("\n--- FOUND " + results.size() + " RESULT(S) ---");
                             for (Employee e : results) {
-                                System.out.println(e); // Uses the nice toString we made
+                                System.out.println(e);
                             }
                         } else {
                             System.out.println("User '" + query + "' not found.");
@@ -147,7 +147,7 @@ public class CA_2 {
                         // 5. Add to List
                         staffList.add(newEmp);
 
-                        // REQUIREMENT MET: "Display all newly added records"
+                        // Display all newly added records
                         System.out.println("\n--- NEW RECORD ADDED SUCCESSFULLY ---");
                         // This calls the toString() method we fixed earlier, showing all details/columns
                         System.out.println(newEmp); 
@@ -160,7 +160,7 @@ public class CA_2 {
                         System.out.println("Generating Organisation Chart...");
 
                         // STEP 1: Sort by Rank (Executives First)
-                        // We use a lambda comparator here to sort by Rank Number (1 -> 3)
+                        // Sort by Rank Number (1 -> 3)
                         staffList.sort((e1, e2) -> Integer.compare(e1.getRole().getRank(), e2.getRole().getRank()));
 
                         // STEP 2: Create Tree and Fill it
@@ -180,7 +180,7 @@ public class CA_2 {
                         System.out.println("Total Nodes: " + orgTree.countNodes());
                         System.out.println("Tree Height: " + orgTree.getHeight());
 
-                        // Reset 'isSorted' because we just messed up the Alphabetical order!
+                        // Reset 'isSorted'
                         isSorted = false; 
                         break;
                         

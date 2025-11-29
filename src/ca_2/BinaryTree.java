@@ -14,7 +14,6 @@ import java.util.Queue;
 public class BinaryTree {
     
     // --- INNER CLASS: NODE ---
-    // Hidden inside the Tree class to reduce file count
     private static class Node {
         Employee data;
         Node left;

@@ -14,7 +14,7 @@ import java.util.List;
 public class AlgorithmUtils {
 
     // --- MERGE SORT (Recursive) ---
-    // We use a wrapper method to make calling it from Main easier
+    // Use a wrapper method to make calling it from Main easier
     public static void mergeSort(ArrayList<Employee> list) {
         if (list.size() <= 1) return; // Base case
 
@@ -89,12 +89,6 @@ public class AlgorithmUtils {
             temp--;
         }
         
-        // Note: The loop above adds them in reverse order (Middle, Left 1, Left 2...)
-        // But since we want ALL matches, we need to check the RIGHT side too.
-        // A cleaner way is to find the FIRST occurrence and then iterate forward.
-        
-        // --- BETTER STRATEGY: Find First Occurrence Logic ---
-        // Let's stick to the simpler expansion for now, but clear the list first to avoid duplicates
         results.clear();
         
         // Find the absolute first occurrence
@@ -103,7 +97,7 @@ public class AlgorithmUtils {
             start--;
         }
         
-        // Now add everyone from 'start' until the name changes
+        // Adding everyone from 'start' until the name changes
         while (start < list.size() && list.get(start).getLastName().equalsIgnoreCase(targetLastName)) {
             results.add(list.get(start));
             start++;
